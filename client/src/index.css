@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply bg-cine-black text-white font-body antialiased;
+  background-image: radial-gradient(circle at 15% 0%, rgba(212, 175, 55, 0.06), transparent 40%),
+    radial-gradient(circle at 85% 10%, rgba(212, 175, 55, 0.04), transparent 35%);
+}
+
+::selection {
+  background: rgba(212, 175, 55, 0.35);
+}
+
+/* thin gold scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0c;
+}
+::-webkit-scrollbar-thumb {
+  background: #3a3628;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
+
+.glass {
+  background: rgba(28, 28, 31, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 175, 55, 0.12);
+}
+
+.gold-text {
+  background: linear-gradient(120deg, #e8c766, #d4af37 60%, #a9812a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.btn-gold {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-b from-cine-gold2 to-cine-gold px-6 py-2.5 font-semibold text-cine-black shadow-gold transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98];
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-cine-gold/40 px-6 py-2.5 font-semibold text-cine-gold2 transition-colors duration-200 hover:bg-cine-gold/10;
+}
+
+.card {
+  @apply rounded-xl2 border border-white/5 bg-cine-panel shadow-card transition-transform duration-300;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease both;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
