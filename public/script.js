@@ -3,6 +3,18 @@
 // ==========================================================
 const API_BASE_URL = "http://localhost:3000/movies";
 
+// Curated cinematic gradient palette used to generate poster backgrounds
+// (since the API has no image field). A movie's title deterministically
+// maps to one of these, so the same movie always gets the same look.
+const POSTER_PALETTE = [
+  { from: "#1B2A4A", to: "#0B1220" }, // deep night blue
+  { from: "#241F1F", to: "#0A0808" }, // noir black
+  { from: "#0F3D3E", to: "#072022" }, // teal bridge
+  { from: "#3A0D2E", to: "#1A0512" }, // neon magenta
+  { from: "#2D1B4E", to: "#120A24" }, // violet
+  { from: "#3A1F3D", to: "#150A1F" }, // aurora dusk
+];
+
 // ==========================================================
 // DOM ELEMENT REFERENCES
 // ==========================================================
@@ -10,6 +22,7 @@ const movieGrid = document.getElementById("movieGrid");
 const loadingSpinner = document.getElementById("loadingSpinner");
 const emptyState = document.getElementById("emptyState");
 const searchInput = document.getElementById("searchInput");
+const genreFiltersEl = document.getElementById("genreFilters");
 
 const addMovieBtn = document.getElementById("addMovieBtn");
 const movieModal = document.getElementById("movieModal");
@@ -27,8 +40,9 @@ const descriptionInput = document.getElementById("description");
 
 const toastContainer = document.getElementById("toastContainer");
 
-// In-memory cache of all movies (used for client-side search filtering)
+// In-memory cache of all movies (used for client-side search/filter)
 let allMovies = [];
+let activeGenre = "All";
 
 // ==========================================================
 // INITIALIZATION
@@ -72,7 +86,8 @@ async function loadMovies() {
     const data = await response.json();
     allMovies = Array.isArray(data) ? data : data.movies || [];
 
-    renderMovies(allMovies);
+    renderGenreFilters();
+    renderMovies(applyFilters());
   } catch (error) {
     console.error(error);
     showToast("Unable to load movies. Please check your backend server.", "error");
@@ -83,7 +98,43 @@ async function loadMovies() {
 }
 
 // ==========================================================
-// RENDER MOVIES AS CARDS
+// RENDER GENRE FILTER PILLS (built dynamically from movie data)
+// ==========================================================
+function renderGenreFilters() {
+  const uniqueGenres = [
+    ...new Set(allMovies.map((m) => (m.genre || "").trim()).filter(Boolean)),
+  ].sort((a, b) => a.localeCompare(b));
+
+  // If the previously active genre no longer exists in the data, reset to "All"
+  if (activeGenre !== "All" && !uniqueGenres.includes(activeGenre)) {
+    activeGenre = "All";
+  }
+
+  const genres = ["All", ...uniqueGenres];
+
+  genreFiltersEl.innerHTML = genres
+    .map(
+      (genre) => `
+        <button
+          class="genre-pill ${genre === activeGenre ? "active" : ""}"
+          data-genre="${escapeHtml(genre)}"
+          type="button"
+        >${escapeHtml(genre)}</button>
+      `
+    )
+    .join("");
+
+  genreFiltersEl.querySelectorAll(".genre-pill").forEach((pill) => {
+    pill.addEventListener("click", () => {
+      activeGenre = pill.dataset.genre;
+      renderGenreFilters();
+      renderMovies(applyFilters());
+    });
+  });
+}
+
+// ==========================================================
+// RENDER MOVIES AS POSTER-STYLE CARDS
 // ==========================================================
 function renderMovies(movies) {
   movieGrid.innerHTML = "";
@@ -101,25 +152,28 @@ function renderMovies(movies) {
     const card = document.createElement("article");
     card.className = "movie-card";
 
+    const gradient = getPosterGradient(movie.title || "");
+    const durationLabel = movie.duration ? `${escapeHtml(String(movie.duration))}m` : "";
+
     card.innerHTML = `
-      <div class="card-icon">🎬</div>
-      <h3 class="card-title">${escapeHtml(movie.title)}</h3>
-      <div class="card-meta">
-        <span class="badge">${escapeHtml(movie.genre)}</span>
-        <span class="badge">${escapeHtml(movie.language)}</span>
-        <span class="badge">${escapeHtml(String(movie.duration))} min</span>
+      <div class="poster" style="background: linear-gradient(155deg, ${gradient.from}, ${gradient.to});">
+        <span class="poster-watermark">🎬</span>
+        ${durationLabel ? `<span class="poster-badge">${durationLabel}</span>` : ""}
+        <div class="poster-scrim">
+          <h3 class="poster-title">${escapeHtml(movie.title)}</h3>
+        </div>
       </div>
+      <p class="card-meta">${escapeHtml(movie.genre)} · ${escapeHtml(movie.language)}</p>
       <p class="card-description">${escapeHtml(movie.description) || "No description available."}</p>
       <div class="card-actions">
-        <button class="btn btn-edit" data-action="edit" data-id="${movie.id}">Edit</button>
-        <button class="btn btn-delete" data-action="delete" data-id="${movie.id}">Delete</button>
+        <button class="btn-ghost btn-edit" data-action="edit" data-id="${movie.id}">Edit</button>
+        <button class="btn-ghost btn-delete" data-action="delete" data-id="${movie.id}">Delete</button>
       </div>
     `;
 
     movieGrid.appendChild(card);
   });
 
-  // Attach event listeners for edit/delete buttons (event delegation not required here since list re-renders each time)
   movieGrid.querySelectorAll('[data-action="edit"]').forEach((btn) => {
     btn.addEventListener("click", () => fillEditForm(btn.dataset.id));
   });
@@ -127,6 +181,18 @@ function renderMovies(movies) {
   movieGrid.querySelectorAll('[data-action="delete"]').forEach((btn) => {
     btn.addEventListener("click", () => deleteMovie(btn.dataset.id));
   });
+}
+
+// ==========================================================
+// POSTER GRADIENT: deterministic pick based on title hash
+// ==========================================================
+function getPosterGradient(title) {
+  let hash = 0;
+  for (let i = 0; i < title.length; i++) {
+    hash = title.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const index = Math.abs(hash) % POSTER_PALETTE.length;
+  return POSTER_PALETTE[index];
 }
 
 // ==========================================================
@@ -181,7 +247,8 @@ async function deleteMovie(id) {
 
     // Remove the movie instantly from the local cache and re-render
     allMovies = allMovies.filter((movie) => String(movie.id) !== String(id));
-    renderMovies(applyCurrentSearchFilter());
+    renderGenreFilters();
+    renderMovies(applyFilters());
 
     showToast("Movie Deleted Successfully", "success");
   } catch (error) {
@@ -286,7 +353,8 @@ async function handleFormSubmit(event) {
       showToast("Movie Added Successfully", "success");
     }
 
-    renderMovies(applyCurrentSearchFilter());
+    renderGenreFilters();
+    renderMovies(applyFilters());
     closeModal();
   } catch (error) {
     console.error(error);
@@ -348,22 +416,20 @@ function clearFormErrors() {
 }
 
 // ==========================================================
-// SEARCH / CLIENT-SIDE FILTERING
+// SEARCH + GENRE FILTERING (combined)
 // ==========================================================
 function handleSearch() {
-  renderMovies(applyCurrentSearchFilter());
+  renderMovies(applyFilters());
 }
 
-function applyCurrentSearchFilter() {
+function applyFilters() {
   const query = searchInput.value.trim().toLowerCase();
 
-  if (!query) {
-    return allMovies;
-  }
-
-  return allMovies.filter((movie) =>
-    (movie.title || "").toLowerCase().includes(query)
-  );
+  return allMovies.filter((movie) => {
+    const matchesSearch = !query || (movie.title || "").toLowerCase().includes(query);
+    const matchesGenre = activeGenre === "All" || movie.genre === activeGenre;
+    return matchesSearch && matchesGenre;
+  });
 }
 
 // ==========================================================

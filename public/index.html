@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Movie Management Dashboard</title>
+  <title>CinéVault — Movie Management Dashboard</title>
 
-  <!-- Google Font -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -19,10 +19,9 @@
   <!-- ============================= -->
   <header class="navbar">
     <div class="navbar-left">
-      <div class="navbar-icon">🎬</div>
-      <div>
-        <h1 class="navbar-title">Movie Management Dashboard</h1>
-        </div>
+      <span class="brand-mark">CINÉ<span class="brand-mark-accent">VAULT</span></span>
+      <span class="brand-divider"></span>
+      <span class="brand-subtitle">Movie Management Dashboard</span>
     </div>
 
     <button id="addMovieBtn" class="btn btn-primary">
@@ -31,20 +30,33 @@
   </header>
 
   <!-- ============================= -->
+  <!-- HERO -->
+  <!-- ============================= -->
+  <section class="hero">
+    <p class="hero-eyebrow">ADMIN PANEL</p>
+    <h1 class="hero-title">Your Film Library</h1>
+    <p class="hero-subtitle">Add, edit and remove movies from your catalog.</p>
+  </section>
+
+  <!-- ============================= -->
   <!-- MAIN CONTENT -->
   <!-- ============================= -->
   <main class="main-content">
 
-    <!-- Search Box -->
-    <div class="search-wrapper">
-      <span class="search-icon">🔍</span>
-      <input
-        type="text"
-        id="searchInput"
-        class="search-input"
-        placeholder="Search movies by title..."
-        autocomplete="off"
-      />
+    <!-- Search + Genre Filters -->
+    <div class="controls-row">
+      <div class="search-wrapper">
+        <span class="search-icon">⌕</span>
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search by title..."
+          autocomplete="off"
+        />
+      </div>
+
+      <div id="genreFilters" class="genre-filters"></div>
     </div>
 
     <!-- Loading Spinner -->
@@ -81,7 +93,7 @@
 
         <div class="form-group">
           <label for="title">Movie Title <span class="required">*</span></label>
-          <input type="text" id="title" name="title" placeholder="e.g. Inception" required />
+          <input type="text" id="title" name="title" placeholder="e.g. Neon Frontier" required />
           <span class="error-message" id="titleError"></span>
         </div>
 
