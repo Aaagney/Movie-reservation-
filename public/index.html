@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CinéVault — Movie Management Dashboard</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================= -->
+  <!-- TOP NAVIGATION -->
+  <!-- ============================= -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <span class="brand-mark">CINÉ<span class="brand-mark-accent">VAULT</span></span>
+      <span class="brand-divider"></span>
+      <span class="brand-subtitle">Movie Management Dashboard</span>
+    </div>
+
+    <button id="addMovieBtn" class="btn btn-primary">
+      <span class="btn-icon">+</span> Add Movie
+    </button>
+  </header>
+
+  <!-- ============================= -->
+  <!-- HERO -->
+  <!-- ============================= -->
+  <section class="hero">
+    <p class="hero-eyebrow">ADMIN PANEL</p>
+    <h1 class="hero-title">Your Film Library</h1>
+    <p class="hero-subtitle">Add, edit and remove movies from your catalog.</p>
+  </section>
+
+  <!-- ============================= -->
+  <!-- MAIN CONTENT -->
+  <!-- ============================= -->
+  <main class="main-content">
+
+    <!-- Search + Genre Filters -->
+    <div class="controls-row">
+      <div class="search-wrapper">
+        <span class="search-icon">⌕</span>
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search by title..."
+          autocomplete="off"
+        />
+      </div>
+
+      <div id="genreFilters" class="genre-filters"></div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner-wrapper" style="display: none;">
+      <div class="spinner"></div>
+      <p>Loading movies...</p>
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="empty-state" style="display: none;">
+      <div class="empty-icon">🎞️</div>
+      <h2>No Movies Available</h2>
+      <p>Click "Add Movie" to create your first movie.</p>
+    </div>
+
+    <!-- Movie Cards Grid -->
+    <section id="movieGrid" class="movie-grid"></section>
+
+  </main>
+
+  <!-- ============================= -->
+  <!-- ADD / EDIT MOVIE MODAL -->
+  <!-- ============================= -->
+  <div id="movieModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add Movie</h2>
+        <button id="closeModalBtn" class="modal-close" aria-label="Close">&times;</button>
+      </div>
+
+      <form id="movieForm" class="modal-form">
+        <!-- Hidden field to store movie id during edit -->
+        <input type="hidden" id="movieId" />
+
+        <div class="form-group">
+          <label for="title">Movie Title <span class="required">*</span></label>
+          <input type="text" id="title" name="title" placeholder="e.g. Neon Frontier" required />
+          <span class="error-message" id="titleError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="genre">Genre <span class="required">*</span></label>
+          <input type="text" id="genre" name="genre" placeholder="e.g. Sci-Fi" required />
+          <span class="error-message" id="genreError"></span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="duration">Duration (minutes) <span class="required">*</span></label>
+            <input type="number" id="duration" name="duration" placeholder="e.g. 148" min="1" required />
+            <span class="error-message" id="durationError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="language">Language <span class="required">*</span></label>
+            <input type="text" id="language" name="language" placeholder="e.g. English" required />
+            <span class="error-message" id="languageError"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" rows="4" placeholder="Brief description of the movie (optional)"></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" id="cancelBtn" class="btn btn-cancel">Cancel</button>
+          <button type="submit" id="saveBtn" class="btn btn-primary">Save Movie</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================= -->
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <!-- ============================= -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
