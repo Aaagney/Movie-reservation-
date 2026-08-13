@@ -1,0 +1,96 @@
+{
+  "holds": {},
+  "bookings": {
+    "A7": {
+      "seat": "A7",
+      "reference": "PREBOOKED"
+    },
+    "A8": {
+      "seat": "A8",
+      "reference": "PREBOOKED"
+    },
+    "B2": {
+      "seat": "B2",
+      "reference": "PREBOOKED"
+    },
+    "B3": {
+      "seat": "B3",
+      "reference": "PREBOOKED"
+    },
+    "C9": {
+      "seat": "C9",
+      "reference": "PREBOOKED"
+    },
+    "C10": {
+      "seat": "C10",
+      "reference": "PREBOOKED"
+    },
+    "D4": {
+      "seat": "D4",
+      "reference": "PREBOOKED"
+    },
+    "D5": {
+      "seat": "D5",
+      "reference": "PREBOOKED"
+    },
+    "E6": {
+      "seat": "E6",
+      "reference": "PREBOOKED"
+    },
+    "E7": {
+      "seat": "E7",
+      "reference": "PREBOOKED"
+    },
+    "F1": {
+      "seat": "F1",
+      "reference": "PREBOOKED"
+    },
+    "F2": {
+      "seat": "F2",
+      "reference": "PREBOOKED"
+    },
+    "G8": {
+      "seat": "G8",
+      "reference": "PREBOOKED"
+    },
+    "C5": {
+      "seat": "C5",
+      "reference": "BK884596",
+      "bookedAt": "2026-07-30T14:23:29.562Z"
+    },
+    "E3": {
+      "seat": "E3",
+      "reference": "BKE4E0FD",
+      "bookedAt": "2026-07-31T13:29:40.301Z"
+    },
+    "F6": {
+      "seat": "F6",
+      "reference": "BK4D33DC",
+      "bookedAt": "2026-07-31T13:30:28.033Z"
+    },
+    "C2": {
+      "seat": "C2",
+      "reference": "BKECFDC3",
+      "bookedAt": "2026-07-31T13:41:28.106Z"
+    },
+    "C3": {
+      "seat": "C3",
+      "reference": "BKECFDC3",
+      "bookedAt": "2026-07-31T13:41:28.106Z"
+    },
+    "D2": {
+      "seat": "D2",
+      "reference": "BKECFDC3",
+      "bookedAt": "2026-07-31T13:41:28.106Z"
+    },
+    "D3": {
+      "seat": "D3",
+      "reference": "BKECFDC3",
+      "bookedAt": "2026-07-31T13:41:28.106Z"
+    }
+  },
+  "blocked": [
+    "A11",
+    "D10"
+  ]
+}

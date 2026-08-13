@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ==============================
 # Dependencies
 # ==============================
@@ -99,3 +100,10 @@ client/.vite/
 *.local
 coverage/
 .cache/
+=======
+.env
+server/.env
+node_modules/
+node_modules/
+.env
+>>>>>>> abb3987d02db75c5920cc9fc36c938b99361c481
