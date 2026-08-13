@@ -1,0 +1,91 @@
+.navbar {
+  width: 100%;
+  height: 98px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 38px;
+
+  background: #07070f;
+  border-bottom: 1px solid #242536;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 29px;
+  line-height: 1;
+  font-weight: 700;
+
+  color: #f2eee9;
+  text-decoration: none;
+  letter-spacing: -1.2px;
+
+  margin-right: 60px;
+}
+
+.navbar-logo span {
+  color: #d59a27;
+}
+
+.navbar-navigation {
+  display: flex;
+  align-items: center;
+  gap: 38px;
+}
+
+.navbar-navigation a {
+  color: #9393af;
+
+  font-size: 21px;
+  font-weight: 400;
+
+  text-decoration: none;
+}
+
+.navbar-navigation a:hover {
+  color: #d59a27;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+}
+
+.navbar-user {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.navbar-user-name {
+  color: #f2eee9;
+
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.navbar-user-role {
+  color: #9292ad;
+
+  font-size: 17px;
+  line-height: 22px;
+}
+
+.signout-button {
+  padding: 8px 0;
+
+  background: transparent;
+  color: #9393af;
+
+  font-size: 20px;
+  cursor: pointer;
+}
