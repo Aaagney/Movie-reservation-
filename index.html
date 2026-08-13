@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CinéVault — Reserve seats</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="CinéVault home"><span>CINÉ</span>VAULT</a>
+      <nav><a href="#">Films</a><a href="#">My Bookings</a></nav>
+      <div class="account"><strong>aaggneykr@gmail.com</strong><small>Member</small><a href="#">Sign out</a></div>
+    </header>
+
+    <main>
+      <section id="seats-view" class="view active">
+        <div class="wrap">
+          <button class="back" type="button">← Back to films</button>
+          <p class="eyebrow">PREMIERE SUITE · WED, JUL 29 · 7:00 PM</p>
+          <h1>Neon Frontier</h1>
+          <p class="subline"><span>1h 48m</span><span>Science fiction</span><b>$18</b> / seat</p>
+          <div class="screen">SCREEN</div>
+          <div class="seat-area" aria-label="Cinema seats"></div>
+          <div class="legend"><span><i class="seat available"></i>Available</span><span><i class="seat selected"></i>Selected</span><span><i class="seat reserved"></i>Reserved</span><span><i class="seat blocked"></i>Blocked</span></div>
+          <footer class="selection-bar">
+            <div id="selection-copy" aria-live="polite">Choose your seats</div>
+            <button id="continue-button" class="primary" disabled>Continue <span>→</span></button>
+          </footer>
+        </div>
+      </section>
+
+      <section id="summary-view" class="view">
+        <div class="narrow">
+          <button class="back previous" type="button">← Change seats</button>
+          <div class="title-line"><div><p class="eyebrow">ONE STEP AWAY</p><h1>Order summary</h1></div><div id="hold-timer" class="timer">◷ Seats held for 10:00</div></div>
+          <article class="summary-card">
+            <div class="movie-tile"><span>NEON<br>FRONTIER</span></div>
+            <div><h2>Neon Frontier</h2><p>Premiere Suite</p><p>Wed, Jul 29 · 7:00 PM</p></div>
+            <hr />
+            <dl><dt>Seats</dt><dd id="summary-seats">—</dd><dt id="quantity-label">Tickets</dt><dd id="summary-subtotal">—</dd><dt>Service fee (5%)</dt><dd id="summary-fee">—</dd><dt class="total">Total</dt><dd id="summary-total" class="total">—</dd></dl>
+          </article>
+          <button id="payment-button" class="primary wide">Proceed to payment <span>→</span></button>
+        </div>
+      </section>
+
+      <section id="payment-view" class="view">
+        <div class="narrow payment">
+          <button class="back previous" type="button">← Order summary</button>
+          <p class="eyebrow">SECURE CHECKOUT</p><h1>Payment details</h1>
+          <div class="credit-card"><small>CINÉVAULT</small><span>•••• &nbsp;•••• &nbsp;•••• &nbsp; 2026</span><div><label>Card holder<strong>AAGGNEYKR@GMAIL.COM</strong></label><label>Expires<strong>08/27</strong></label></div></div>
+          <form id="payment-form">
+            <label>Card number<input required inputmode="numeric" placeholder="1234  5678  9012  3456" maxlength="19" /></label>
+            <label>Cardholder name<input required value="aaggneykr@gmail.com" /></label>
+            <div class="form-row"><label>Expiry (MM/YY)<input required placeholder="08/27" maxlength="5" /></label><label>CVV<input required inputmode="numeric" placeholder="•••" maxlength="3" /></label></div>
+            <p class="security">🔒 Payments are end-to-end encrypted and processed securely.<br />(Demo — no real charge.)</p>
+            <button class="primary wide" type="submit">Pay <span id="pay-total">$0</span> &amp; confirm</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="confirmed-view" class="view">
+        <div class="narrow confirmation">
+          <div class="success-mark">✓</div><p class="eyebrow">BOOKING CONFIRMED</p><h1>You’re going to the movies.</h1><p class="subline">Your seats are reserved. Enjoy the film.</p>
+          <article class="summary-card receipt"><p class="eyebrow">BOOKING REFERENCE</p><strong id="booking-ref" class="reference">BKN7A4D</strong><hr /><dl><dt>Film</dt><dd>Neon Frontier</dd><dt>Date &amp; time</dt><dd>Wed, Jul 29 · 7:00 PM</dd><dt>Seats</dt><dd id="receipt-seats">—</dd><dt>Subtotal</dt><dd id="receipt-subtotal">—</dd><dt>Service fee</dt><dd id="receipt-fee">—</dd><dt class="total">Total charged</dt><dd id="receipt-total" class="total">—</dd></dl></article>
+          <div class="actions"><button class="secondary" type="button">My bookings</button><button id="browse-button" class="primary" type="button">Browse films</button></div>
+        </div>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
