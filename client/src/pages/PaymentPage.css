@@ -1,0 +1,336 @@
+.payment-page {
+  min-height: calc(100vh - 98px);
+  background: #06070e;
+
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.payment-container {
+  width: 696px;
+  margin: 0 auto;
+}
+
+
+/* =========================
+   ORDER SUMMARY
+========================= */
+
+.order-summary {
+  display: block;
+
+  margin-bottom: 42px;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: #8e9ee4;
+
+  font-size: 21px;
+  font-weight: 400;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   PAYMENT HEADING
+========================= */
+
+.payment-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 53px;
+}
+
+.payment-title-row h1 {
+  margin: 0;
+
+  color: #f4f0eb;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 50px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+
+/* =========================
+   TIMER
+========================= */
+
+.seat-timer {
+  width: 294px;
+  height: 56px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  border: 1px solid #4c3514;
+  border-radius: 12px;
+
+  background: #17120f;
+
+  color: #db9715;
+
+  font-size: 20px;
+}
+
+.seat-timer strong {
+  font-family: "Courier New", monospace;
+  font-size: 22px;
+}
+
+.timer-icon {
+  font-size: 26px;
+}
+
+
+/* =========================
+   CARD PREVIEW
+========================= */
+
+.payment-card {
+  width: 100%;
+  height: 264px;
+
+  padding: 38px 37px 37px;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 49px;
+
+  border: 1px solid #292d48;
+  border-radius: 23px;
+
+  background: linear-gradient(
+    110deg,
+    #1b1d35 0%,
+    #202944 58%,
+    #143d6a 100%
+  );
+}
+
+.card-label {
+  margin-bottom: 34px;
+
+  color: #9ba9dd;
+
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.card-number-preview {
+  color: #f2eee9;
+
+  font-family: "Courier New", monospace;
+  font-size: 25px;
+
+  letter-spacing: 5px;
+}
+
+.card-bottom {
+  margin-top: auto;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.card-bottom > div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.card-small-label {
+  color: #8995bd;
+
+  font-size: 18px;
+}
+
+.card-bottom strong {
+  color: #f5f0eb;
+
+  font-size: 21px;
+  letter-spacing: 1px;
+}
+
+.card-expiry-preview {
+  text-align: right;
+}
+
+.card-expiry-preview strong {
+  font-family: "Courier New", monospace;
+  font-size: 25px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.payment-form {
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 10px;
+
+  color: #8e9ee4;
+
+  font-size: 18px;
+
+  letter-spacing: 1.5px;
+}
+
+.form-group input {
+  width: 100%;
+  height: 67px;
+
+  padding: 0 21px;
+
+  border: 1px solid #2e3047;
+  border-radius: 12px;
+
+  outline: none;
+
+  background: #101119;
+  color: #f3efeb;
+
+  font-size: 22px;
+}
+
+.form-group input::placeholder {
+  color: #8f8d91;
+
+  opacity: 1;
+}
+
+.form-group input:focus {
+  border-color: #7587d3;
+}
+
+.payment-form > .form-group {
+  margin-bottom: 25px;
+}
+
+
+/* EXPIRY + CVV */
+
+.form-row {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 24px;
+
+  margin-bottom: 24px;
+}
+
+
+/* =========================
+   SECURITY MESSAGE
+========================= */
+
+.security-message {
+  width: 100%;
+
+  padding: 19px 18px;
+
+  margin-bottom: 24px;
+
+  border: 1px solid #174b39;
+  border-radius: 12px;
+
+  background: #081713;
+
+  color: #26f58b;
+
+  font-size: 20px;
+  line-height: 1.45;
+}
+
+
+/* =========================
+   PAY BUTTON
+========================= */
+
+.pay-button {
+  width: 100%;
+  height: 90px;
+
+  border: none;
+  border-radius: 16px;
+
+  background: #d49a28;
+  color: #050505;
+
+  font-size: 26px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.pay-button:hover {
+  background: #dda22d;
+}
+
+/* =========================
+   VALIDATION
+========================= */
+
+.payment-error {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #ff6b6b;
+
+  font-size: 15px;
+  letter-spacing: 0;
+}
+
+.input-error {
+  border-color: #ff6b6b !important;
+}
+
+.timer-error {
+  margin-top: -35px;
+  margin-bottom: 25px;
+  text-align: right;
+}
+
+.pay-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.api-error-message {
+  width: 100%;
+
+  padding: 14px 18px;
+  margin-bottom: 18px;
+
+  border: 1px solid #6e2d35;
+  border-radius: 10px;
+
+  background: #1c0d11;
+  color: #ff707b;
+
+  font-size: 16px;
+}
